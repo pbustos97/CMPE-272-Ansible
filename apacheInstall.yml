@@ -1,0 +1,10 @@
+---
+- name: Install and setup apache2 services
+  hosts: Servers
+  become: yes
+  tasks:
+    - name: Install apache2
+      apt: name=apache2 update_cache=yes state=latest
+
+    - name: Start apache2
+      service: name=apache2 state=restarted
