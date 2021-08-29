@@ -5,6 +5,13 @@
   tasks:
     - name: Install apache2
       apt: name=apache2 update_cache=yes state=latest
+      async: 45
+      poll: 5
+
+    - name: Rename default index.html to index2.html
+      command: mv /var/www/html/index.html /var/www/html/index2.html
 
     - name: Start apache2
       service: name=apache2 state=restarted
+      async: 45
+      poll: 5

@@ -1,0 +1,9 @@
+---
+- name: Deploy apache2 service
+  hosts: Servers
+  become: yes
+  tasks:
+    - name: Attempt to start apache services
+      service: name=apache2 state=started
+      async: 45
+      poll: 5

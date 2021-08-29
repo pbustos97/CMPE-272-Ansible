@@ -1,0 +1,9 @@
+---
+- name: Undeploy apache2 service
+  hosts: Servers
+  become: yes
+  tasks:
+    - name: Stop the apache2 service
+      service: name=apache2 state=stopped
+      async: 45
+      poll: 5
