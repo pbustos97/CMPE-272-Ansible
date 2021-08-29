@@ -1,0 +1,6 @@
+- name: Add ports to apache's ports.conf
+  hosts: Servers
+  become: yes
+  tasks:
+    - name: Add port to ports.conf
+      shell: echo "Listen 8080" >> /etc/apache2/ports.conf

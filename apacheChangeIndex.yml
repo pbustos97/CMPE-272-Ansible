@@ -3,13 +3,5 @@
   hosts: Servers
   become: yes
   tasks:
-    - name: Add listen to port 8080 in apache's ports.conf file
-      lineinfile:
-        path: /etc/apache2/ports.conf
-        backup: yes
-        regexp: '^Listen \d'
-        insertafter: '^Listen 80'
-        line: 'Listen 8080'
-
     - name: Write 'Hello World from SJSU' to index.html
-      command: echo "Hello World from SJSU" > /var/www/html/index.html
+      command: bash -c 'echo "Hello World from SJSU" > /var/www/html/index.html'
