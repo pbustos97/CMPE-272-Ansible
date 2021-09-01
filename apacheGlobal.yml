@@ -1,0 +1,35 @@
+---
+- name: Apache services
+  hosts: Servers
+  become: yes
+
+  tasks:
+    - name: Install Apache2 for debian systems
+      apt: name=apache2 update_cache=yes state=latest
+      async: 45
+      poll: 5
+      tags: install
+
+    - name: Start Apache Services
+      service: name=apache2 state=started
+      async: 45
+      poll: 5
+      tags: startApache
+
+    - name: Stop Apache Services
+      service: name=apache2 state=stopped
+      async: 45
+      poll: 5
+      tags: stopApache
+
+    - name: Change index.html
+      shell: echo "Hello World from SJSU" > /var/www/html/index.html
+      tags: replaceIndex
+
+    - name: Add port 8080
+      shell: echo "Listen 8080" >> /etc/apache2/ports.conf
+      tags: addPort
+
+    - name: Delete index.html
+      shell: rm /var/www/html/index.html
+      tags: deleteIndex
